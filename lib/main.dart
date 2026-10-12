@@ -32,6 +32,15 @@ class _FormPageState extends State<FormPage> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
 
+  void _submit() {
+    // validate() runs every validator and returns true if all pass.
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Hello ${_nameController.text}!')));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +75,10 @@ class _FormPageState extends State<FormPage> {
                   return null;
                 },
               ),
+              const SizedBox(height: 50),
+
+              // Submit button
+              ElevatedButton(onPressed: _submit, child: const Text('Submit')),
             ],
           ),
         ),
